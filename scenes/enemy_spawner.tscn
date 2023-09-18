@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://c4b7mpph4ldhr"]
+
+[ext_resource type="Script" path="res://EnemySpawner.gd" id="1_wvf63"]
+[ext_resource type="PackedScene" uid="uid://7k03og7ex6aq" path="res://scenes/enemy.tscn" id="2_gbxa4"]
+
+[node name="EnemySpawner" type="Node2D"]
+script = ExtResource("1_wvf63")
+enemy_node = ExtResource("2_gbxa4")
+
+[node name="WaveTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="timeout" from="WaveTimer" to="." method="_on_wave_timer_timeout"]

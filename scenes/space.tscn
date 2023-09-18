@@ -1,0 +1,76 @@
+[gd_scene load_steps=9 format=3 uid="uid://y85l5uf0u5pe"]
+
+[ext_resource type="Script" path="res://parallax_motion.gd" id="1_ur1ob"]
+[ext_resource type="Texture2D" uid="uid://caql2h33cw60k" path="res://assets/SpaceShooterAssetPack_BackGrounds.png" id="2_lhoei"]
+[ext_resource type="PackedScene" uid="uid://crjhsdn7gms3w" path="res://scenes/player.tscn" id="3_okdxt"]
+[ext_resource type="Texture2D" uid="uid://cruluvf2g38ya" path="res://assets/Group 37.png" id="5_qpngr"]
+[ext_resource type="Texture2D" uid="uid://cml5qoc3lcb0g" path="res://assets/Group 40.png" id="6_nnkp0"]
+[ext_resource type="PackedScene" uid="uid://c4b7mpph4ldhr" path="res://scenes/enemy_spawner.tscn" id="7_hnysh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ktc72"]
+size = Vector2(13.5, 255.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qk6p6"]
+size = Vector2(128, 29)
+
+[node name="Space" type="Node2D"]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+script = ExtResource("1_ur1ob")
+
+[node name="FarStars" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.5, 0.5)
+motion_mirroring = Vector2(0, 256)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/FarStars"]
+scale = Vector2(1.16364, 1.024)
+texture = ExtResource("2_lhoei")
+centered = false
+region_enabled = true
+region_rect = Rect2(10, 0, 110, 250)
+
+[node name="NearStars" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(0, 256)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/NearStars"]
+scale = Vector2(1.27, 1.16818)
+texture = ExtResource("2_lhoei")
+centered = false
+region_enabled = true
+region_rect = Rect2(270, 270, 100, 220)
+
+[node name="Player" parent="." instance=ExtResource("3_okdxt")]
+position = Vector2(67, 202)
+
+[node name="EnemySpawner" parent="." instance=ExtResource("7_hnysh")]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(1, 2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-8, 126)
+shape = SubResource("RectangleShape2D_ktc72")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(134, 125.75)
+shape = SubResource("RectangleShape2D_ktc72")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(64, -15)
+shape = SubResource("RectangleShape2D_qk6p6")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(64, 241.5)
+shape = SubResource("RectangleShape2D_qk6p6")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D2"]
+position = Vector2(64, 243)
+scale = Vector2(0.177861, 0.14677)
+texture = ExtResource("5_qpngr")
+
+[node name="Sprite2D2" type="Sprite2D" parent="StaticBody2D2"]
+position = Vector2(64, 249)
+scale = Vector2(0.0982705, 0.0966874)
+texture = ExtResource("6_nnkp0")
